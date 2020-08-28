@@ -27,8 +27,6 @@ okt = Okt()
 app = Flask(__name__)
 app.secret_key = b"7\xe39,\x8eE\xff\xe5\x9b\x95\xc6,\xfcX'b"
 
-
-
 #database
 cluster = MongoClient("mongodb+srv://sangbeen:12341234@boilerplate.cw0as.gcp.mongodb.net/user_login_system?retryWrites=true&w=majority")
 db = cluster["user_login_system"]
@@ -57,7 +55,7 @@ def home():
 def dashboard():
     return render_template('test.html')
 
-'''
+
 def find_dict_mismatch(one_line , dict_list):   #국어사전
     cnt = 0
     for one_word in one_line:
@@ -73,34 +71,12 @@ def find_dict_match(one_line , dict_list):  #특수문자 사전
             cnt += 1
             print(one_word)
     return cnt
-    '''
-
 '''
-def get_article_contents(news_link):
-    contents=[]
-    res = requests.get(news_link)
-    soup = bs(res.text, 'lxml')
-    body = soup.find('div', class_="_article_body_contents")
-    for content in body:
-        if type(content) is bs4.element.NavigableString and len(content)>50:
-             contents.append(content.strip())
-    return contents
-'''
-
-def preprocess_string(string_list):
-    noun_list = []
-    for line in string_list:
-        line = re.sub('\s', " ", line)  #텍스트파일 전처리.
-        nouns = okt.nouns(line)
-        noun_list.append(nouns)
-
-    return noun_list
-
-'''
+    #국어사전 추가시 필요
     excel_data_df = pd.read_excel('korean_dict.xlsx', sheet_name='NIADic')
     korean_dict_list = excel_data_df['term'].tolist()
 '''
-
+#@app.route('/user/signup', methods=['POST'])
 
 @app.route('/post', methods=['POST'])
 def crawl():

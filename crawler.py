@@ -36,18 +36,19 @@ class Crawler:
         korean_dict_list = excel_data_df['term'].tolist()
         dictionary = Dictionary(korean_dict_list)
         print('[한글 사전 준비 완료]')'''
-        #(추가) 전처리. 불용어 거르고 명사화
-        dictionary = Dictionary()
-        noun_list = []
-        noun_list = dictionary.preprocess_string(script)
 
-       
+
+        #(추가) 전처리. 불용어 거르고 명사화
+        #noun_list = []
+        #noun_list = dictionary.preprocess_string(script)
+
+        dictionary = Dictionary()
+
 
         
         # 전체 오류단어 리스트 생성
         errorfre_list = []
-        for one_line in noun_list:
-            #print(one_line)
+        for one_line in script:
             i = dictionary.find_dict(one_line)[1]
             errorfre_list.append(i)
         errorfre_list = list(chain.from_iterable(errorfre_list))
