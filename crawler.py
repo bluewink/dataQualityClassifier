@@ -12,7 +12,7 @@ import pandas as pd
 
 class Crawler:
     def crawl(self):
-        url_3= request.form['test']
+        url_3= request.form['url_input']
         #url_3="https://news.naver.com/main/read.nhn?mode=LSD&sid1=001&oid=023&aid=0003547854"
         print(url_3)
         if "naver" in url_3:

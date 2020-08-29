@@ -21,7 +21,6 @@ from collections import Counter
 from crawler import Crawler
 
 
-
 okt = Okt()
 
 app = Flask(__name__)
@@ -53,24 +52,9 @@ def home():
 @app.route('/dashboard/')
 @login_required
 def dashboard():
-    return render_template('test.html')
+    return render_template('dashboard.html')
 
 
-def find_dict_mismatch(one_line , dict_list):   #국어사전
-    cnt = 0
-    for one_word in one_line:
-        if one_word not in dict_list:
-            cnt += 1
-            print(one_word)
-    return cnt
-
-def find_dict_match(one_line , dict_list):  #특수문자 사전
-    cnt = 0
-    for one_word in one_line:
-        if one_word in dict_list:
-            cnt += 1
-            print(one_word)
-    return cnt
 '''
     #국어사전 추가시 필요
     excel_data_df = pd.read_excel('korean_dict.xlsx', sheet_name='NIADic')
