@@ -9,6 +9,7 @@ from itertools import chain
 import pandas as pd
 #from app import app
 
+import dataprocess
 
 class Crawler:
     def crawl(self):
@@ -47,6 +48,10 @@ class Crawler:
 
         
         # 전체 오류단어 리스트 생성
+
+        #dataprocess 추가
+        dataprocess.data_process(script)
+
         errorfre_list = []
         for one_line in script:
             i = dictionary.find_dict(one_line)[1]
