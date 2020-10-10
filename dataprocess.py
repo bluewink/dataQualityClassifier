@@ -13,11 +13,22 @@ import csv
 #         script[0] = "comments"
 
 
+
+
+
+
 sentence1 = "10월백신출싥~~현실이ㅜㅜ 되면 좋겠네요~~"
 
-#띄어쓰기 개수 세기
-def count_space(sentence):
-    return sentence.count(' ')
+#띄어쓰기 개수 세기 -> 연속된 스페이스 개수 세기
+def count_more_than_one_space(sentence):
+    space_count = sentence.count(' ')
+    tmp_list = []
+    tmp_list = sentence.split()
+    if space_count == len(tmp_list)-1:
+      return 0
+    else:
+      return 1
+
 #단모음 + 단자음 개수 세기
 def count_single_letter(sentence):
     ja = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ','ㄳ','ㄵ','ㄶ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅄ']
@@ -59,14 +70,21 @@ def count_con_vow_num_spe(sentence):
       count_consonant.append(word)
     elif word in JUNGSUNG_LIST:
       count_vowel.append(word)
-    elif word in NUMBER_LIST:
-      count_number.append(word)
     elif word in SPECIAL_LIST:
       count_special.append(word)
+  # elif word in NUMBER_LIST:
+  #   count_number.append(word)
+
+  #숫자로 끝나는지 여부 체크
+  end_with_number_flag = 0
+
+  if sentence[len(sentence)-1] in NUMBER_LIST:
+    end_with_number_flag = 1
+  
 
   count_consonant =len(count_consonant)
   count_vowel =len(count_vowel)
-  count_number =len(count_number)
+  count_number =end_with_number_flag
   count_special =len(count_special)
   
   return count_consonant, count_vowel, count_number, count_special
@@ -90,7 +108,7 @@ def data_process(script):
   #script2=['나는 바보입1니당!!!','너ㅚㅇㄴㄹㄵㄷㄹ34ㅈㄹ두 사 랑 다','안녕하세요','이건 올바른 문장입니다.']
 #script2=['추가해도 되나요?','ㅇㅎㅁㄴㅅ호호호']
   for sentence2 in script:
-    count_space1 = count_space(sentence2)
+    count_space1 = count_more_than_one_space(sentence2)
     count_single_letter1 = count_single_letter(sentence2)
     count_consonant1 = count_con_vow_num_spe(sentence2)[0]
     count_vowel1 = count_con_vow_num_spe(sentence2)[1]
@@ -108,11 +126,11 @@ def data_process(script):
 
 
 #엑셀파일 x인자
-  wf = open('test.csv', 'a' ,newline='')
-  rf = open('test.csv', 'r' ,newline='')
+  wf = open('x인자.csv', 'a' ,newline='')
+  rf = open('x인자.csv', 'r' ,newline='')
 
   writer = csv.writer(wf)
-  index=['단어','띄어쓰기','단모음단자음','자음','모음','숫자','특수문자']
+  index=['단어','두번_이상의_띄어쓰기','단모음단자음','자음','모음','마지막_글자가_숫자','특수문자']
     
     #index가 없을시 index 추가
   header_check = rf.readline()

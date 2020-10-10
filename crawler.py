@@ -49,8 +49,12 @@ class Crawler:
         
         # 전체 오류단어 리스트 생성
 
+        # test_script = ['안녕하세  요', '숫자로 끝납니다123', '정상 문장입니다', '123개']
+        # dataprocess.data_process(test_script)
+
         #dataprocess 추가
         dataprocess.data_process(script)
+    
 
         errorfre_list = []
         for one_line in script:
